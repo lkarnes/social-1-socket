@@ -17,19 +17,11 @@ const io = socketIo(server);
 let interval;
 
 io.on("connection", (socket) => {
-  socket.on('send', listener)
-  socket.emit('person2', 'hello')
   socket.on('message', (args) => {
-    socket.emit('returnmessage', args)
-    console.log(args)
+    socket.emit('message', args)
   })
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
   socket.on("disconnect", () => {
     console.log('disconnected')
-    clearInterval(interval);
   });
 });
 
